@@ -14,7 +14,7 @@ aquacsp_registry = "4.6.20049"
 # You must have already configured a domain name
 # and hosted Zone in Route 53 for this to work!!!
 #################################################
-dns_domain   = "securitynoodles.com"
+dns_domain   = "example.com"
 console_name = "aqua"
 
 ###################################################
