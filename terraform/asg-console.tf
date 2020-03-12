@@ -34,7 +34,7 @@ module "asg-server" {
 
   #image_id      = data.aws_ami.ecs-server-optimized.image_id
   image_id      = "ami-06c98c6fe6f20c437"
-  instance_type = var.instance_type
+  instance_type = var.console_instance_type
   # This is an important setting. Open console, gateway, and enforcer ports on EC2 ECS host!
   security_groups = [aws_security_group.ec2-ecs-server-host.id]
 
@@ -83,6 +83,11 @@ module "asg-server" {
     {
       key                 = "Terraform"
       value               = "true"
+      propagate_at_launch = true
+    },
+    {
+      key                 = "Version"
+      value               = var.tversion
       propagate_at_launch = true
     },
   ]

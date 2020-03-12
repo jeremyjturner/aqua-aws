@@ -33,7 +33,7 @@ module "asg-gateway" {
   lc_name = "${var.project}-ecs-lc"
 
   image_id      = data.aws_ami.ecs-gateway-optimized.image_id
-  instance_type = var.instance_type
+  instance_type = var.gateway_instance_type
   # This is an important setting. Open console, gateway, and enforcer ports on EC2 ECS host!
   security_groups = [aws_security_group.ec2-ecs-gateway-host.id]
 
@@ -84,5 +84,11 @@ module "asg-gateway" {
       value               = "true"
       propagate_at_launch = true
     },
+    {
+      key                 = "Version"
+      value               = var.tversion
+      propagate_at_launch = true
+    },
   ]
 }
+

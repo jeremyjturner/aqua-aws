@@ -13,9 +13,12 @@ resource "aws_lb" "nlb-server" {
   enable_deletion_protection       = false
 
   tags = {
-    Project   = var.project
     Name      = "${var.project}-nlb-server"
-    Terraform = "true"
+    Project   = var.project
+    Owner     = var.resource_owner
+    Contact   = var.contact
+    Terraform = true
+    Version   = var.tversion
   }
 }
 

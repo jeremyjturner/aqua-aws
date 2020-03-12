@@ -19,7 +19,7 @@
     ],
     "command": null,
     "linuxParameters": null,
-    "cpu": 256,
+    "cpu": ${gateway_cpu_units_size},
     "environment": [
       {
         "name": "SCALOCK_GATEWAY_PRIVATE_IP",

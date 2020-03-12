@@ -24,7 +24,7 @@
     ],
     "command": null,
     "linuxParameters": null,
-    "cpu": 512,
+    "cpu": ${console_cpu_units_size},
     "environment": [
       {
         "name": "AQUA_GRPC_MODE",

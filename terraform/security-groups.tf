@@ -14,9 +14,11 @@ resource "aws_security_group" "alb-console-sg" {
   }
 
   tags = {
-    Name      = "${var.project}-alb-sg"
-    Terraform = "true"
+    Name      = "${var.project}-alb-console-sg"
     Owner     = var.resource_owner
+    Contact   = var.contact
+    Terraform = true
+    Version   = var.tversion
   }
 }
 
@@ -59,8 +61,10 @@ resource "aws_security_group" "alb-gateway-sg" {
 
   tags = {
     Name      = "${var.project}-alb-gateway-sg"
-    Terraform = "true"
     Owner     = var.resource_owner
+    Contact   = var.contact
+    Terraform = true
+    Version   = var.tversion
   }
 }
 
@@ -91,8 +95,10 @@ resource "aws_security_group" "ec2-ecs-server-host" {
 
   tags = {
     Name      = "${var.project}-ec2-server-sg"
-    Terraform = "true"
     Owner     = var.resource_owner
+    Contact   = var.contact
+    Terraform = true
+    Version   = var.tversion
   }
 }
 
@@ -134,8 +140,10 @@ resource "aws_security_group" "ec2-ecs-gateway-host" {
 
   tags = {
     Name      = "${var.project}-ec2-gateway-sg"
-    Terraform = "true"
     Owner     = var.resource_owner
+    Contact   = var.contact
+    Terraform = true
+    Version   = var.tversion
   }
 }
 
@@ -177,8 +185,10 @@ resource "aws_security_group" "rds" {
 
   tags = {
     Name      = "${var.project}-rds-sg"
-    Terraform = "true"
     Owner     = var.resource_owner
+    Contact   = var.contact
+    Terraform = true
+    Version   = var.tversion
   }
 }
 
