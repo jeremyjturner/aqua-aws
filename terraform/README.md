@@ -14,7 +14,7 @@
     - [AWS Managed Role](#aws-managed-role)
     - [AWS Service Limits](#aws-service-limits)
     - [Unsupported Instance Configuration](#unsupported-instance-configuration)
-    - [The new ARN and resource ID format must be enabled to propagate tags](#The new ARN and resource ID format must be enabled to propagate tags)
+    - [The new ARN and resource ID format must be enabled to propagate tags](#The-new-ARN-and-resource-ID-format-must-be-enabled-to-propagate-tags)
 - [Running the Template Step-by-Step](#running-the-template-step-by-step)
 - [Cleaning Up](#cleaning-up)
 
@@ -37,7 +37,7 @@ Before you can use this template, you'll need to have a few things in place:
 <img src="https://github.com/jeremyjturner/aqua-aws/blob/master/terraform/images/01-route53-domain-name-example.jpg" alt="Example of having a Route 53 domain name configured." height="75%" width="75%">
 </p>
 
-3. Terraform installed on the computer that will execute this template. This template was created with Terraform version `v0.12.16`. If you are new to Terraform, check out [Terraform Switcher](https://warrensbox.github.io/terraform-switcher/) to help you get started.
+3. Terraform installed on the computer that will execute this template. This template was created with Terraform version `v0.12.20`. If you are new to Terraform, check out [Terraform Switcher](https://warrensbox.github.io/terraform-switcher/) to help you get started.
 
 4. The AWS CLI configured on the computer that will deploy this template with Terraform.
 
