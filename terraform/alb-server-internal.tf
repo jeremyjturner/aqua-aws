@@ -11,8 +11,10 @@ resource "aws_alb" "alb-gateway" {
 
   tags = {
     Project   = var.project
-    Name      = "${var.project}-alb-gateway"
-    Terraform = "true"
+    Owner     = var.resource_owner
+    Contact   = var.contact
+    Terraform = true
+    Version   = var.tversion
   }
 }
 

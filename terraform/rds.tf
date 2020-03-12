@@ -1,15 +1,18 @@
+locals {
+  timestamp = formatdate("DD-MMM-YY", timestamp())
+}
+
 module "db" {
-  source  = "terraform-aws-modules/rds/aws"
-  version = "~> 2.0"
+  source = "terraform-aws-modules/rds/aws"
 
   identifier = "${var.project}-rds"
 
   # Uncomment this if you want to build from a snapshot
-  #snapshot_identifier = "${data.aws_db_snapshot.db_snapshot.id}"
-  engine            = "postgres"
-  engine_version    = "9.6.11"
-  instance_class    = var.db_instance_type
-  allocated_storage = var.db_storage_size
+  # snapshot_identifier = "feb-29-2020-my-aquacsp-snapshot"
+  engine                 = "postgres"
+  engine_version         = "10.11"
+  instance_class         = var.db_instance_type
+  allocated_storage      = var.db_storage_size
 
   name                   = var.project
   username               = var.postgres_username
@@ -25,25 +28,26 @@ module "db" {
   create_monitoring_role = true
   subnet_ids             = module.vpc.database_subnets
 
-  # Aqua CSP requirements as of 4.2:
-  # PostgreSQL 9.5 or 9.6, with a minimum storage size of 30 GB
+  # Aqua CSP requirements:
   # https://docs.aquasec.com/docs/system-requirements
-  allow_major_version_upgrade = false
+  # Set to false if you don't want upgrade.
+  allow_major_version_upgrade = true
 
-  family                     = "postgres9.6"
-  major_engine_version       = "9.6"
-  final_snapshot_identifier  = var.project
+  family = "postgres10"
+  major_engine_version       = "10"
+  final_snapshot_identifier  = "${local.timestamp}-${var.project}"
   deletion_protection        = var.rds_delete_protect
   auto_minor_version_upgrade = true
   backup_retention_period    = "0"
   multi_az                   = var.multple_az
   copy_tags_to_snapshot      = true
-  skip_final_snapshot        = true
+  skip_final_snapshot        = var.skip_final_snapshot
 
   tags = {
     Project   = var.project
-    Terraform = "true"
     Owner     = var.resource_owner
+    Contact   = var.contact
+    Terraform = true
+    Version   = var.tversion
   }
 }
-

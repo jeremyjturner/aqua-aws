@@ -1,6 +1,5 @@
 module "vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 2.0"
+  source = "terraform-aws-modules/vpc/aws"
 
   name = "${var.project}-vpc"
   cidr = var.vpc_cidr
@@ -19,8 +18,9 @@ module "vpc" {
   one_nat_gateway_per_az = true
 
   tags = {
-    Terraform = "true"
     Owner     = var.resource_owner
+    Contact   = var.contact
+    Terraform = true
+    Version   = var.tversion
   }
 }
-

@@ -56,6 +56,26 @@ resource "aws_iam_role_policy_attachment" "policy-attachment-ecr-instance" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 }
 
+# This policy allows AWS Cross Account ECR scanning.
+resource "aws_iam_role_policy" "assume_role" {
+  name = "allow-assume-role"
+  role = aws_iam_role.instance-role-ecs-instance.id
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}
+EOF
+
+}
+
 #################################################
 # ECS Service Role
 #################################################

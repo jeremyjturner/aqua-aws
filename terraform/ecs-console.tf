@@ -3,8 +3,10 @@ resource "aws_ecs_cluster" "server-cluster" {
 
   tags = {
     Name      = "${var.project}-server-cluster"
-    Terraform = "true"
     Owner     = var.resource_owner
+    Contact   = var.contact
+    Terraform = true
+    Version   = var.tversion
   }
 }
 
@@ -39,8 +41,10 @@ resource "aws_ecs_service" "console-service" {
 
   tags = {
     Name      = "${var.project}-console"
-    Terraform = "true"
     Owner     = var.resource_owner
+    Contact   = var.contact
+    Terraform = true
+    Version   = var.tversion
   }
 }
 
@@ -58,8 +62,10 @@ resource "aws_ecs_task_definition" "console-task-definition" {
 
   tags = {
     Name      = "${var.project}-console"
-    Terraform = "true"
     Owner     = var.resource_owner
+    Contact   = var.contact
+    Terraform = true
+    Version   = var.tversion
   }
 }
 
@@ -73,6 +79,7 @@ data "template_file" "console-service" {
   vars = {
     registry_version         = var.aquacsp_registry
     console_memory_size      = var.console_memory_size_mb
+    console_cpu_units_size   = var.console_cpu_units
     awslogs_group            = "/ecs/${var.project}"
     awslogs_region           = var.region
     aqua_server_console_port = var.aqua_server_console_port

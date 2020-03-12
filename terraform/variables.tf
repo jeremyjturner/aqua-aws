@@ -5,7 +5,17 @@ variable "region" {
 
 variable "resource_owner" {
   default     = ""
-  description = "This will be used for tagging."
+  description = "Put an owner in the tag."
+}
+
+variable "contact" {
+  default     = ""
+  description = "Put an email address in the tag."
+}
+
+variable "tversion" {
+  default     = ""
+  description = "Be a bro and let us know the working Terraform version."
 }
 
 variable "project" {
@@ -65,9 +75,19 @@ variable "console_memory_size_mb" {
   description = "Size in megabytes for the Console container."
 }
 
+variable "console_cpu_units" {
+  default     = ""
+  description = "AWS ECS Task Definition CPU units for the Aqua Console."
+}
+
 variable "gateway_memory_size_mb" {
   default     = ""
   description = "Size in megabytes for the Gateway container."
+}
+
+variable "gateway_cpu_units" {
+  default     = ""
+  description = "AWS ECS Task Definition CPU units for the Aqua Gateway."
 }
 
 variable "secretsmanager_container_repository" {
@@ -96,9 +116,14 @@ variable "ssh-key_name" {
   description = "Required key pair to launch the ECS instance."
 }
 
-variable "instance_type" {
+variable "console_instance_type" {
   default     = ""
-  description = "ECS instance size."
+  description = "ECS instance size for the Aqua console."
+}
+
+variable "gateway_instance_type" {
+  default     = ""
+  description = "ECS instance size for the Aqua gateway."
 }
 
 variable "db_instance_type" {
@@ -119,6 +144,16 @@ variable "postgres_port" {
 variable "db_storage_size" {
   default     = "30"
   description = "Storage for Aqua CSP database. Minimum requirement is 30 GB."
+}
+
+variable "db_delete_protection" {
+  default     = "30"
+  description = "Storage for Aqua CSP database. Minimum requirement is 30 GB."
+}
+
+variable "skip_final_snapshot" {
+  default     = true
+  description = "Make a snapshot before destroying instance."
 }
 
 variable "multple_az" {

@@ -22,12 +22,19 @@ data "aws_iam_policy_document" "trust-policy-ecr-role" {
 }
 
 resource "aws_iam_role" "ecr-role" {
-  name               = "${var.aquascp_role_name}"
-  assume_role_policy = "${data.aws_iam_policy_document.trust-policy-ecr-role.json}"
+  name               = var.aquascp_role_name
+  assume_role_policy = data.aws_iam_policy_document.trust-policy-ecr-role.json
+
+  tags = {
+    Owner     = var.resource_owner
+    Contact   = var.contact
+    Terraform = true
+    Version   = var.tversion
+  }
 }
 
 resource "aws_iam_policy_attachment" "ecr-policy-attach" {
-  name       = "${var.aquascp_role_policy_name}"
+  name       = var.aquascp_role_policy_name
   roles      = ["${aws_iam_role.ecr-role.name}"]
-  policy_arn = "${data.aws_iam_policy.AmazonEC2ContainerRegistryReadOnly.arn}"
+  policy_arn = data.aws_iam_policy.AmazonEC2ContainerRegistryReadOnly.arn
 }

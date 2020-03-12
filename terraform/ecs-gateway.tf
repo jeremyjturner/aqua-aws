@@ -3,8 +3,10 @@ resource "aws_ecs_cluster" "gateway-cluster" {
 
   tags = {
     Name      = "${var.project}-gateway-cluster"
-    Terraform = "true"
     Owner     = var.resource_owner
+    Contact   = var.contact
+    Terraform = true
+    Version   = var.tversion
   }
 }
 
@@ -29,8 +31,10 @@ resource "aws_ecs_service" "gateway-service" {
 
   tags = {
     Name      = "${var.project}-gateway"
-    Terraform = "true"
     Owner     = var.resource_owner
+    Contact   = var.contact
+    Terraform = true
+    Version   = var.tversion
   }
 
 }
@@ -52,8 +56,10 @@ resource "aws_ecs_task_definition" "gateway-task-definition" {
 
   tags = {
     Name      = "${var.project}-gateway"
-    Terraform = "true"
     Owner     = var.resource_owner
+    Contact   = var.contact
+    Terraform = true
+    Version   = var.tversion
   }
 }
 
@@ -61,18 +67,18 @@ data "template_file" "gateway-service" {
   template = file("task-definitions/gateway-service.tmpl.json")
 
   vars = {
-    registry_version     = var.aquacsp_registry
-    gateway_memory_size  = var.gateway_memory_size_mb
-    awslogs_group        = "/ecs/${var.project}"
-    awslogs_region       = var.region
-    aqua_enforcer_port   = var.aqua_enforcer_port
-    db_hostname          = module.db.this_db_instance_address
-    db_port              = var.postgres_port
-    db_username          = var.postgres_username
-    db_password          = var.secretsmanager_db_password
-    credentialsParameter = data.aws_secretsmanager_secret.container_repository.arn
-    enforcer_dns         = "${aws_lb.nlb-microenforcer.dns_name}:${var.aqua_enforcer_port}"
-    #gateway_dns          = "${aws_alb.alb-gateway.dns_name}:${var.aqua_server_gateway_port}"
-    gateway_dns = "${aws_lb.nlb-server.dns_name}:${var.aqua_server_gateway_port}"
+    registry_version        = var.aquacsp_registry
+    gateway_memory_size     = var.gateway_memory_size_mb
+    gateway_cpu_units_size  = var.gateway_cpu_units
+    awslogs_group           = "/ecs/${var.project}"
+    awslogs_region          = var.region
+    aqua_enforcer_port      = var.aqua_enforcer_port
+    db_hostname             = module.db.this_db_instance_address
+    db_port                 = var.postgres_port
+    db_username             = var.postgres_username
+    db_password             = var.secretsmanager_db_password
+    credentialsParameter    = data.aws_secretsmanager_secret.container_repository.arn
+    enforcer_dns            = "${aws_lb.nlb-microenforcer.dns_name}:${var.aqua_enforcer_port}"
+    gateway_dns             = "${aws_lb.nlb-server.dns_name}:${var.aqua_server_gateway_port}"
   }
 }

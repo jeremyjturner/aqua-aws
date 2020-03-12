@@ -43,8 +43,10 @@ EOF
 
 
   tags = {
-    Terraform = "true"
     Owner     = var.resource_owner
+    Contact   = var.contact
+    Terraform = true
+    Version   = var.tversion
   }
 }
 
